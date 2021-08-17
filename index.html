@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <script src="images.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+	<script src="https://npmcdn.com/aframe-event-set-component@3.0.1"></script>
+    <script src="VRController.js"></script>
+	<script src="debugout.js"></script>
+	<script src="download.js"></script>
+	<script src="jquery-3.6.0.js"></script>
+	<meta content = "text/html; charset=utf-8" http-equiv="Content-Type">
+	  <meta content = "utf-8" http-equiv="encoding">
+  </head>
+
+  <body>
+   
+    
+<a-scene id="scenes" vr-mode-ui inspector keyboard-shortcuts screenshot device-orientation-permission-ui>
+      
+	 
+	<a-assets>
+	
+		
+        <a-entity oculus-touch-controls="hand: right"></a-entity>
+        <a-entity laser-controls="hand: right"></a-entity>
+
+        <a-mixin id="FeelingsIcon" geometry="primitive:plane;height:1" material="transparent:true;shader:flat" event-set__1="_event: mouseenter; geometry.height: 1.6" event-set__2="_event: mouseleave; geometry.height: 1"></a-mixin>
+
+		<a-mixin id="TestImage" geometry="primitive:plane;height:1" material="transparent:true;shader:flat"></a-mixin>
+
+		<video id="SphereVideo" crossorigin="anonymous" autoplay loop src="https://testervr.s3.us-west-1.amazonaws.com/AnjunaBeach.mp4" webkit-playsinline ></video>
+    
+      </a-assets>
+
+		
+	
+    <a-entity oculus-touch-controls="hand: right"></a-entity>
+    <a-entity laser-controls="hand: right"></a-entity>
+	
+
+
+	<a-sky id="WhiteSky" color="black" radius="50" visible="false">
+        <a-entity position="-0.449 2.336 -6.724" rotation="0 -180 0" scale="10 10 10" geometry="primitive:plane" material="transparent:true;shader:flat"></a-entity>
+	</a-sky>
+	
+	
+	<a-videosphere id="vidsphere" src="#SphereVideo" geometry="radius:500"></a-videosphere>
+	
+		<a-entity id="fixationcross" position="0 1.5 -4" scale="0 0 0" rotation="0 0 0">
+			<a-plane id = "cross" position="0 0 0" rotation="0 0 0" width="2" height=".05" color="orange"></a-plane>
+			<a-plane id = "cross" position="0 0 0" rotation="0 0 0" width=".05" height="2" color="orange"></a-plane>
+		</a-entity>
+		
+		<a-entity id="pictureboxDECREASE" position="0 2.3 -4.1" scale="0 0 0" rotation="0 0 0">
+			<a-plane id = "pbox" position="0 0 0" rotation="0 0 0" width="5.2" height="5.2" color="blue"></a-plane>
+		</a-entity>
+		
+		<a-entity id="pictureboxLOOK" position="0 2.3 -4.1" scale="0 0 0" rotation="0 0 0">
+			<a-plane id = "pbox" position="0 0 0" rotation="0 0 0" width="5.2" height="5.2" color="green"></a-plane>
+		</a-entity>
+		
+		<a-entity id="instrDECREASE" position="0 2 -4" scale="0 0 0" rotation="0 0 0">
+			<a-entity id="text" material="color:#00FF80" position="0 0 -1" scale="5 5 5" text__qtext="value:DECREASE;side:double;align:center;color:white;"></a-entity>
+		</a-entity>
+			
+		<a-entity id="instrLOOK" position="0 2 -4" scale="0 0 0" rotation="0 0 0">
+			<a-entity id="text" material="color:blue" position="0 0 -1" scale="5 5 5" text__qtext="value:LOOK;side:double;align:center;color:white;"></a-entity>
+		</a-entity>
+		
+		
+		<a-entity id="FeelingsPos" position="0 1.5 -4" scale="0 0 0" rotation="0 0 0">
+			<a-entity id="HowYaFeelingText" material="color:white" position="0 .95 -1" scale="5 5 5" text__qtext="value:How positive do you feel right now?;side:double;align:center;color:blue;"></a-entity>
+
+			<a-entity id="HowYaFeelingText2" material="color:white" position="0 .70 -1" scale="5 5 5" text__qtext="value: Not at all positive--------------------------------Very positive;side:double;align:center;color:blue;"></a-entity>
+			<a-entity id="HowYaFeelingText3" material="color:blue" position="0 0 -1" scale="5 5 5" text__qtext="value:1        2        3        4        5        6        7        8        9;side:double;align:center;color:blue;"></a-entity>
+
+			<a-plane mixin="FeelingsIcon" onmousedown=bugout.log("p1") position="-2.3 0 -1" scale = ".5 1 1" color="#FF8C00"></a-plane>
+			<a-plane mixin="FeelingsIcon" onmousedown=bugout.log("p2") position="-1.725 0 -1" scale = ".5 1 1" color="#EC7F0F"></a-plane>
+			<a-plane mixin="FeelingsIcon" onmousedown=bugout.log("p3") position="-1.15 0 -1" scale = ".5 1 1" color="#D9711F"></a-plane>
+			<a-plane mixin="FeelingsIcon" onmousedown=bugout.log("p4") position="-0.575 0 -1" scale = ".5 1 1" color="#C6642E"></a-plane>
+			<a-plane mixin="FeelingsIcon" onmousedown=bugout.log("p5") position="0 0 -1" scale = ".5 1 1" color="#B4573D"></a-plane>
+			<a-plane mixin="FeelingsIcon" onmousedown=bugout.log("p6") position=".575 0 -1" scale = ".5 1 1" color="#A1494C"></a-plane>
+			<a-plane mixin="FeelingsIcon" onmousedown=bugout.log("p7") position="1.15 0 -1" scale = ".5 1 1" color="#8E3C5C"></a-plane>
+			<a-plane mixin="FeelingsIcon" onmousedown=bugout.log("p8") position="1.725 0 -1" scale = ".5 1 1" color="#7B2E6B"></a-plane>
+			<a-plane mixin="FeelingsIcon" onmousedown=bugout.log("p9") position="2.3 0 -1" scale = ".5 1 1" color="#68217A"></a-plane>
+        </a-entity>
+		
+		<a-entity id="FeelingsNeg" position="0 1.5 -4" scale="0 0 0" rotation="0 0 0">
+			<a-entity id="HowYaFeelingText" material="color:white" position="0 -.95 -1" scale="5 5 5" text__qtext="value:How negative do you feel right now?;side:double;align:center;color:green;"></a-entity>
+
+			<a-entity id="HowYaFeelingText2" material="color:white" position="0 -.70 -1" scale="5 5 5" text__qtext="value: Not at all negative------------------------------Very negative;side:double;align:center;color:green;"></a-entity>
+			<a-entity id="HowYaFeelingText3" material="color:green" position="0 0 -1" scale="5 5 5" text__qtext="value:1        2        3        4        5        6        7        8        9;side:double;align:center;color:green;"></a-entity>
+
+			<a-plane mixin="FeelingsIcon" onmousedown=bugout.log("p1") position="-2.3 0 -1" scale=".5 1 1" color="#FF8C00"></a-plane>
+			<a-plane mixin="FeelingsIcon" onmousedown=bugout.log("p2") position="-1.725 0 -1" scale = ".5 1 1" color="#EC7F0F"></a-plane>
+			<a-plane mixin="FeelingsIcon" onmousedown=bugout.log("p3") position="-1.15 0 -1" scale = ".5 1 1" color="#D9711F"></a-plane>
+			<a-plane mixin="FeelingsIcon" onmousedown=bugout.log("p4") position="-0.575 0 -1" scale = ".5 1 1" color="#C6642E"></a-plane>
+			<a-plane mixin="FeelingsIcon" onmousedown=bugout.log("p5") position="0 0 -1" scale = ".5 1 1" color="#B4573D"></a-plane>
+			<a-plane mixin="FeelingsIcon" onmousedown=bugout.log("p6") position=".575 0 -1" scale = ".5 1 1" color="#A1494C"></a-plane>
+			<a-plane mixin="FeelingsIcon" onmousedown=bugout.log("p7") position="1.15 0 -1" scale = ".5 1 1" color="#8E3C5C"></a-plane>
+			<a-plane mixin="FeelingsIcon" onmousedown=bugout.log("p8") position="1.725 0 -1" scale = ".5 1 1" color="#7B2E6B"></a-plane>
+			<a-plane mixin="FeelingsIcon" onmousedown=bugout.log("p9") position="2.3 0 -1" scale = ".5 1 1" color="#68217A"></a-plane>
+        </a-entity>
+	
+    <a-entity camera="active: true" look-controls>
+	
+	</a-entity>																							
+		
+    </a-scene>
+
+	<script>
+	"use strict";
+    $(document).ready(function () {
+var images = [
+    {
+        "imgNum": 0,
+        "imgName": "01-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/01-LOOK.jpg"
+    }, {
+        "imgNum": 1,
+        "imgName": "02-DECR.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/02-DECR.jpg"
+    }, {
+        "imgNum": 2,
+        "imgName": "03-DECR.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/03-DECR.jpg"
+    }, {
+        "imgNum": 3,
+        "imgName": "04-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/04-LOOK.jpg"
+    }, {
+        "imgNum": 4,
+        "imgName": "05-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/05-LOOK.jpg"
+    }, {
+        "imgNum": 5,
+        "imgName": "06-DECR.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/06-DECR.jpg"
+    }, {
+        "imgNum": 6,
+        "imgName": "07-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/07-LOOK.jpg"
+    }, {
+        "imgNum": 7,
+        "imgName": "08-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/08-LOOK.jpg"
+    }, {
+        "imgNum": 8,
+        "imgName": "09-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/09-LOOK.jpg"
+    }, {
+        "imgNum": 9,
+        "imgName": "10-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/10-LOOK.jpg"
+    }, {
+        "imgNum": 10,
+        "imgName": "11-DECR.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/11-DECR.jpg"
+    }, {
+        "imgNum": 11,
+        "imgName": "12-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/12-LOOK.jpg"
+    }, {
+        "imgNum": 12,
+        "imgName": "13-DECR.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/13-DECR.jpg"
+    }, {
+        "imgNum": 13,
+        "imgName": "14-DECR.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/14-DECR.jpg"
+    }, {
+        "imgNum": 14,
+        "imgName": "15-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/15-LOOK.jpg"
+    }, {
+        "imgNum": 15,
+        "imgName": "16-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/16-LOOK.jpg"
+    }, {
+        "imgNum": 16,
+        "imgName": "17-DECR.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/17-DECR.jpg"
+    }, {
+        "imgNum": 17,
+        "imgName": "18-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/18-LOOK.jpg"
+    }, {
+        "imgNum": 18,
+        "imgName": "19-DECR.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/19-DECR.jpg"
+    }, {
+        "imgNum": 19,
+        "imgName": "20-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/20-LOOK.jpg"
+    }, {
+        "imgNum": 20,
+        "imgName": "21-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/21-LOOK.jpg"
+    }, {
+        "imgNum": 21,
+        "imgName": "22-DECR.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/22-DECR.jpg"
+    }, {
+        "imgNum": 22,
+        "imgName": "23-DECR.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/23-DECR.jpg"
+    }, {
+        "imgNum": 23,
+        "imgName": "24-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/24-LOOK.jpg"
+    }, {
+        "imgNum": 24,
+        "imgName": "25-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/25-LOOK.jpg"
+    }, {
+        "imgNum": 25,
+        "imgName": "26-DECR.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/26-DECR.jpg"
+    }, {
+        "imgNum": 26,
+        "imgName": "27-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/27-LOOK.jpg"
+    }, {
+        "imgNum": 27,
+        "imgName": "28-DECR.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/28-DECR.jpg"
+    }, {
+        "imgNum": 28,
+        "imgName": "29-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/29-LOOK.jpg"
+    }, {
+        "imgNum": 29,
+        "imgName": "30-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/30-LOOK.jpg"
+    }, {
+        "imgNum": 30,
+        "imgName": "31-DECR.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/31-DECR.jpg"
+    }, {
+        "imgNum": 31,
+        "imgName": "32-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/32-LOOK.jpg"
+    }, {
+        "imgNum": 32,
+        "imgName": "33-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/33-LOOK.jpg"
+    }, {
+        "imgNum": 33,
+        "imgName": "34-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/34-LOOK.jpg"
+    }, {
+        "imgNum": 34,
+        "imgName": "35-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/35-LOOK.jpg"
+    }, {
+        "imgNum": 35,
+        "imgName": "36-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/36-LOOK.jpg"
+    }, {
+        "imgNum": 36,
+        "imgName": "37-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/37-LOOK.jpg"
+    }, {
+        "imgNum": 37,
+        "imgName": "38-DECR.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/38-DECR.jpg"
+    }, {
+        "imgNum": 38,
+        "imgName": "39-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/39-LOOK.jpg"
+    }, {
+        "imgNum": 39,
+        "imgName": "40-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/40-LOOK.jpg"
+    }, {
+        "imgNum": 40,
+        "imgName": "41-DECR.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/41-DECR.jpg"
+    }, {
+        "imgNum": 41,
+        "imgName": "42-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/42-LOOK.jpg"
+    }, {
+        "imgNum": 42,
+        "imgName": "43-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/43-LOOK.jpg"
+    }, {
+        "imgNum": 43,
+        "imgName": "44-DECR.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/44-DECR.jpg"
+    }, {
+        "imgNum": 44,
+        "imgName": "45-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/45-LOOK.jpg"
+    }, {
+        "imgNum": 45,
+        "imgName": "46-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/46-LOOK.jpg"
+    }, {
+        "imgNum": 46,
+        "imgName": "47-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/47-LOOK.jpg"
+    }, {
+        "imgNum": 47,
+        "imgName": "48-DECR.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/48-DECR.jpg"
+    }, {
+        "imgNum": 48,
+        "imgName": "49-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/49-LOOK.jpg"
+    }, {
+        "imgNum": 49,
+        "imgName": "50-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/50-LOOK.jpg"
+    }, {
+        "imgNum": 50,
+        "imgName": "51-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/51-LOOK.jpg"
+    }, {
+        "imgNum": 51,
+        "imgName": "52-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/52-LOOK.jpg"
+    }, {
+        "imgNum": 52,
+        "imgName": "53-DECR.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/53-DECR.jpg"
+    }, {
+        "imgNum": 53,
+        "imgName": "54-LOOK.jpg",
+        "imgURL": "https://testervr.s3.us-west-1.amazonaws.com/Order+2/54-LOOK.jpg"
+    }
+]
+	
+		var video = document.getElementById('vidsphere');
+		video.play();
+		
+		var bugout = new debugout();
+		setTimeout(startTest, 30 * 1000);
+		//Change second number equal to the number of seconds the video will last for.
+		
+		//#9
+		function showCross(){
+			var fixcross = document.getElementById('fixationcross');
+			fixcross.setAttribute('scale', '1 1 1');
+			setTimeout(hideCross, 9 * 1000);
+		}
+		
+		//#10
+		function hideCross(){
+			var fixcross = document.getElementById('fixationcross');
+			fixcross.setAttribute('scale', '0 0 0');
+		}
+		
+		//#1
+		function instruct(img, num){
+			var rnum = Math.floor(Math.random()*2);
+			var skybox = document.getElementById('WhiteSky');
+			var task = namelist[num-1].substring(namelist[num-1].length-4,namelist[num-1].length);
+      console.log("task", task)
+			if (task == 'LOOK'){
+				bugout.log('LOOK');
+				skybox.setAttribute('color', 'green');
+				var look = document.getElementById('instrLOOK');
+				look.setAttribute('scale', '5 5 5');
+				setTimeout(function() {hideInstruct(img, num, 'LOOK');}, 2 * 1000);
+			}
+			else{
+				bugout.log('DECREASE');
+				skybox.setAttribute('color', 'blue');
+				var decrease = document.getElementById('instrDECREASE');
+				decrease.setAttribute('scale', '5 5 5');
+				setTimeout(function() {hideInstruct(img, num, 'DECREASE');}, 2 * 1000);
+			}
+		}
+		
+		//#2
+		function hideInstruct(img, num, inst){
+			var skybox = document.getElementById('WhiteSky');
+			skybox.setAttribute('color', 'black');
+			var insttxt = document.getElementById('instr' + inst);
+			insttxt.setAttribute('scale', '0 0 0');
+			showPicture(img, num, inst)
+		}
+		
+		//#6
+		function hideRatingNeg(num) {
+			var feelindicator = document.getElementById('FeelingsNeg');
+			feelindicator.setAttribute('scale', '0 0 0');
+			showRatingPos(num);
+		}
+
+		//#5
+		function showRatingNeg(num) {
+			bugout.log('Negative Rating Image ' + num); 
+			var feelindicator = document.getElementById('FeelingsNeg');
+			feelindicator.setAttribute('scale', '1 1 1');
+			setTimeout(function() {hideRatingNeg(num);}, 3 * 1000);
+		}
+
+		//#8
+		function hideRatingPos() {
+			var feelindicator = document.getElementById('FeelingsPos');
+			feelindicator.setAttribute('scale', '0 0 0');
+			showCross();
+		}
+
+		//#7
+		function showRatingPos(num) {
+			bugout.log('Positive Rating Image ' + num); 
+			var feelindicator = document.getElementById('FeelingsPos');
+			feelindicator.setAttribute('scale', '1 1 1');
+			setTimeout(hideRatingPos, 3 * 1000);
+		}		
+		
+
+		//#4
+		function hidePicture(img, num, inst) {
+			var picture = document.getElementById(String(img));
+			var pictureborder = document.getElementById('picturebox' + inst);
+			picture.setAttribute('scale', '0 0 0');
+			pictureborder.setAttribute('scale', '0 0 0');
+			showRatingNeg(num)
+		}
+
+		//#3
+		function showPicture(img, num, inst){			
+			var pictureholder = document.getElementById(img.toString());	
+			var pictureborder = document.getElementById('picturebox' + inst);
+			pictureholder.setAttribute('scale', '5 5 5');
+			pictureborder.setAttribute('scale', '1.2 1.2 1.2');				
+
+			setTimeout(function() {hidePicture(img, num, inst);}, 8 * 1000);
+		}
+		
+		var namelist = [];
+		var picturelist = [];
+		var picnum = 0;
+		function startTest(){	
+			// $.ajax({
+			// 	url : "/assets/",
+			// // async: false,
+			// 	success: function (data) {
+			// 		$(data).find("a").attr("href", function (i, val) {
+			// console.log(val)
+			// 			if( val.match(/.(jpe?g|png|gif)$/) ) { 							
+			// 				$('a-assets').append( "<img id ='k" + i + "' crossorigin='anonymous' preload='auto' src='/assets/" + val + "'>" );
+			// 				$('a-scene').append("<a-entity id='p" + i + "' position='0 1 -4' scale='0 0 0' rotation='0 0 0'><a-entity mixin='TestImage' position='0 0.25 0' scale = '1 1 1' material='src:#k" + i + ";'></a-entity> </a-entity>");
+			// 				let temp = "p" + picnum;
+			// 				picturelist.push(temp);
+			// 				namelist.push(val);
+			// 				picnum++;
+			// 			} 
+			// 		});
+			// 	}
+			// });
+      
+      images.forEach(img => {
+        $('a-assets').append( `<img id ='k${img.imgNum}' crossorigin='anonymous' preload='auto' src='${img.imgURL}'>` );
+        $('a-scene').append(`<a-entity id='p${img.imgNum}' position='0 1 -4' scale='0 0 0' rotation='0 0 0'><a-entity mixin='TestImage' position='0 0.25 0' scale = '1 1 1' material='src:#k${img.imgNum};'></a-entity> </a-entity>`);
+        // let temp = "p" + picnum;
+        picturelist.push(`p${img.imgNum}`);
+        namelist.push(img.imgName.substring(0, img.imgName.length-4));
+        picnum++;
+      })
+      console.log("picture list: ", picturelist, "name list: ", namelist)
+      
+			
+		
+			//pause video
+			// var video = document.getElementById('SphereVideo');
+			video.pause()
+			//hide video with skybox
+			var skybox = document.getElementById('WhiteSky');
+			skybox.setAttribute('color', 'black');
+			skybox.setAttribute('visible', 'true');
+			
+			//needs some delay to allow images to be added to the list
+			setTimeout(startToo, 1000);
+		}
+    
+    var video = document.getElementById('SphereVideo');
+    video.onpause = () => {
+<!--       video.play() -->
+    }
+		 
+		function startToo(){
+			picturelist.forEach(function(element){ 
+					//this is the timeout for setting each new picture cycle. currently set to 25 second test cycles.
+					setTimeout(function(){instruct(element, picturelist.indexOf(element)+1);}, 25 * (picturelist.indexOf(element)+1) * 1000);
+				})
+			//each test takes 25 seconds, with no delay in between. need an extra 25 seconds at the end for the last test to complete.
+			setTimeout(function() { alert("This is the end of the VR task. Please save the data.");}, (picnum * 25 * 1000) + 25000);
+		}
+		
+		//Below this point contains the method for ending the test and giving the data
+		var nativeAlert = window.alert;
+
+		window.alert = function(msg) {
+			nativeAlert(msg);
+			bugout.log('End Of Experiment');
+
+			var currLog = bugout.getLog();
+			download(currLog, "VRData.txt");
+		};
+			
+		
+		});
+	</script>
+	
+	</body>
+
+</html>
+
+
+
+
+
+}
